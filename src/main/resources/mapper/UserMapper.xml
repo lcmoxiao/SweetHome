@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.jlp.pojo.User">
+        <id column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="userpassword" jdbcType="VARCHAR" property="userpassword"/>
+        <result column="usercreatetime" jdbcType="TIMESTAMP" property="usercreatetime"/>
+        <result column="userbirth" jdbcType="TIMESTAMP" property="userbirth"/>
+        <result column="usersex" jdbcType="TINYINT" property="usersex"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        userid, username, userpassword, usercreatetime, userbirth, usersex
+    </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where userid = #{userid,jdbcType=INTEGER}
+    </select>
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where username = #{username}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from user
+        where userid = #{userid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.jlp.pojo.User">
+        insert into user (userid, username, userpassword,
+                          usercreatetime, userbirth, usersex)
+        values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR},
+                #{usercreatetime,jdbcType=TIMESTAMP}, #{userbirth,jdbcType=TIMESTAMP}, #{usersex,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jlp.pojo.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="userpassword != null">
+                userpassword,
+            </if>
+            <if test="usercreatetime != null">
+                usercreatetime,
+            </if>
+            <if test="userbirth != null">
+                userbirth,
+            </if>
+            <if test="usersex != null">
+                usersex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userpassword != null">
+                #{userpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="usercreatetime != null">
+                #{usercreatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userbirth != null">
+                #{userbirth,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usersex != null">
+                #{usersex,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jlp.pojo.User">
+        update user
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userpassword != null">
+                userpassword = #{userpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="usercreatetime != null">
+                usercreatetime = #{usercreatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userbirth != null">
+                userbirth = #{userbirth,jdbcType=TIMESTAMP},
+            </if>
+            <if test="usersex != null">
+                usersex = #{usersex,jdbcType=TINYINT},
+            </if>
+        </set>
+        where userid = #{userid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jlp.pojo.User">
+        update user
+        set username       = #{username,jdbcType=VARCHAR},
+            userpassword   = #{userpassword,jdbcType=VARCHAR},
+            usercreatetime = #{usercreatetime,jdbcType=TIMESTAMP},
+            userbirth      = #{userbirth,jdbcType=TIMESTAMP},
+            usersex        = #{usersex,jdbcType=TINYINT}
+        where userid = #{userid,jdbcType=INTEGER}
+    </update>
+</mapper>

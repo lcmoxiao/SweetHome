@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.MatchGroupRelationMapper">
+    <resultMap id="BaseResultMap" type="com.jlp.pojo.MatchGroupRelation">
+        <result column="matchgroupid" jdbcType="INTEGER" property="matchgroupid"/>
+        <result column="userid" jdbcType="INTEGER" property="userid"/>
+    </resultMap>
+
+    <select id="selectByUserid">
+        select *
+        from matchgrouprelation
+        where userid = #{userid}
+    </select>
+
+    <select id="selectByMatchGroupid">
+        select *
+        from matchgrouprelation
+        where matchgroupid = #{matchgroupid}
+    </select>
+
+    <insert id="insert" parameterType="com.jlp.pojo.MatchGroupRelation">
+        insert into matchgrouprelation (matchgroupid, userid)
+        values (#{matchgroupid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jlp.pojo.MatchGroupRelation">
+        insert into matchgrouprelation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="matchgroupid != null">
+                matchgroupid,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="matchgroupid != null">
+                #{matchgroupid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByUserid" parameterType="java.lang.Integer">
+        delete
+        from matchgrouprelation
+        where userid = #{userid}
+    </delete>
+
+    <delete id="deleteByMatchGroupid" parameterType="java.lang.Integer">
+        delete
+        from matchgrouprelation
+        where matchgroupid = #{matchgroupid}
+    </delete>
+
+</mapper>
