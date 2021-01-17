@@ -20,7 +20,7 @@ public class MatchGroupRelationService {
         return matchGroupRelationMapper.insert(matchGroupRelation);
     }
 
-    public int deleteMatchGroupRelationBy(Integer matchGroupid) {
+    public int deleteMatchGroupRelationByMatchGroupid(Integer matchGroupid) {
         return matchGroupRelationMapper.deleteByMatchGroupid(matchGroupid);
     }
 

@@ -21,7 +21,7 @@ public class UserService {
     }
 
     @Caching(put = {@CachePut(key = "#user.username")})
-    public User getUser(User user){
+    public User getUser(User user) {
         return userMapper.selectByUsername(user.getUsername());
     }
 
@@ -39,7 +39,6 @@ public class UserService {
     public Integer deleteByUserid(User user) {
         return userMapper.deleteByPrimaryKey(user.getUserid());
     }
-
 
 
 }

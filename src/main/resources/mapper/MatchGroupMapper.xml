@@ -20,7 +20,7 @@
         from matchgroup
         where matchgroupid = #{matchgroupid,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.jlp.pojo.MatchGroup">
+    <insert id="insert" parameterType="com.jlp.pojo.MatchGroup" useGeneratedKeys="true" keyProperty="matchgroupid">
         insert into matchgroup (matchgroupid, matchgroupname, matchgroupcreatetime)
         values (#{matchgroupid,jdbcType=INTEGER}, #{matchgroupname,jdbcType=VARCHAR},
                 #{matchgroupcreatetime,jdbcType=TIMESTAMP})

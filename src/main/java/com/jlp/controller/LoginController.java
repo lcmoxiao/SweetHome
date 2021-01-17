@@ -7,10 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,7 +25,7 @@ public class LoginController {
 
     @ApiOperation(value = "输入用户名和密码 登录")
     @PostMapping
-    User login(User user) {
+    User login(@RequestBody User user) {
         String username = user.getUsername();
         String userpassword = user.getUserpassword();
         User u2 = (User)userService.getUser(user);

@@ -63,17 +63,17 @@
         <!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
         <!--        </table>-->
 
-        <table tableName="matchGroup"
-               domainObjectName="MatchGroup" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="matchGroup"-->
+<!--               domainObjectName="MatchGroup" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--        </table>-->
 
-        <table tableName="matchgrouprelation"
-               domainObjectName="MatchGroupRelation" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="matchgrouprelation"-->
+<!--               domainObjectName="MatchGroupRelation" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--        </table>-->
 
 
     </context>

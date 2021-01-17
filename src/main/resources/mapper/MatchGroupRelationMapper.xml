@@ -6,14 +6,20 @@
         <result column="userid" jdbcType="INTEGER" property="userid"/>
     </resultMap>
 
+    <sql id="Base_Column_List">
+        matchgroupid, userid
+    </sql>
+
     <select id="selectByUserid">
-        select *
+        select
+        <include refid="Base_Column_List"/>
         from matchgrouprelation
         where userid = #{userid}
     </select>
 
     <select id="selectByMatchGroupid">
-        select *
+        select
+        <include refid="Base_Column_List"/>
         from matchgrouprelation
         where matchgroupid = #{matchgroupid}
     </select>

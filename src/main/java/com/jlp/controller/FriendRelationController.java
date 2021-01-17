@@ -32,7 +32,7 @@ public class FriendRelationController {
 
     @ApiOperation(value = "增加指定好友")
     @PostMapping
-    Integer postUser(FriendRelation friendRelation) {
+    Integer postFriendRelation(@RequestBody FriendRelation friendRelation) {
         if (friendRelationService.selectByUserid1AndUserid2(friendRelation) == null) {
             friendRelation.setFriendrelationcreatetime(Calendar.getInstance().getTime());
             return friendRelationService.insert(friendRelation);
@@ -40,12 +40,11 @@ public class FriendRelationController {
             logger.debug("该好友关系已存在");
             return -1;
         }
-
     }
 
     @ApiOperation(value = "删除指定好友")
     @DeleteMapping
-    Integer deleteUser(FriendRelation friendRelation) {
+    Integer deleteFriendRelation(@RequestBody FriendRelation friendRelation) {
         FriendRelation fr = friendRelationService.selectByUserid1AndUserid2(friendRelation);
         if (fr != null) {
             friendRelation.setFriendrelationcreatetime(Calendar.getInstance().getTime());

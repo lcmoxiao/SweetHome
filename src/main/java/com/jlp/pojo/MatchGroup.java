@@ -9,6 +9,7 @@ public class MatchGroup {
 
     private Date matchgroupcreatetime;
 
+
     public Integer getMatchgroupid() {
         return matchgroupid;
     }

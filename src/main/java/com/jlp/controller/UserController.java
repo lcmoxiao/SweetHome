@@ -28,13 +28,13 @@ public class UserController {
 
     @ApiOperation(value = "获取指定用户账户名(username)的账户信息")
     @GetMapping
-    User getUser(User user) {
+    User getUser( User user) {
         return userService.getUser(user);
     }
 
     @ApiOperation(value = "新增用户信息")
     @PostMapping
-    Integer postUser(User user) {
+    Integer postUser(@RequestBody User user) {
         return userService.insert(user);
     }
 
@@ -46,8 +46,8 @@ public class UserController {
 
     @ApiOperation(value = "删除用户信息")
     @DeleteMapping
-    Integer deleteUser(User user) {
-        return userService.insert(user);
+    Integer deleteUser(@RequestBody User user) {
+        return userService.deleteByUserid(user);
     }
 
 
