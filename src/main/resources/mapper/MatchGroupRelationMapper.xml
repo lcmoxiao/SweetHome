@@ -10,14 +10,14 @@
         matchgroupid, userid
     </sql>
 
-    <select id="selectByUserid">
+    <select id="selectByUserid" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from matchgrouprelation
         where userid = #{userid}
     </select>
 
-    <select id="selectByMatchGroupid">
+    <select id="selectByMatchGroupid" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from matchgrouprelation

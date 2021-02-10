@@ -15,6 +15,14 @@ public class User {
 
     private Byte usersex;
 
+    private String userphone;
+
+    private String usermail;
+
+    private Integer userfriendsize;
+
+    private Integer userstate;
+
     public Integer getUserid() {
         return userid;
     }
@@ -63,15 +71,35 @@ public class User {
         this.usersex = usersex;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userid=" + userid +
-                ", username='" + username + '\'' +
-                ", userpassword='" + userpassword + '\'' +
-                ", usercreatetime=" + usercreatetime +
-                ", userbirth=" + userbirth +
-                ", usersex=" + usersex +
-                '}';
+    public String getUserphone() {
+        return userphone;
+    }
+
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
+    }
+
+    public String getUsermail() {
+        return usermail;
+    }
+
+    public void setUsermail(String usermail) {
+        this.usermail = usermail;
+    }
+
+    public Integer getUserfriendsize() {
+        return userfriendsize;
+    }
+
+    public void setUserfriendsize(Integer userfriendsize) {
+        this.userfriendsize = userfriendsize;
+    }
+
+    public Integer getUserstate() {
+        return userstate;
+    }
+
+    public void setUserstate(Integer userstate) {
+        this.userstate = userstate;
     }
 }

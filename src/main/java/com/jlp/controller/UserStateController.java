@@ -24,7 +24,7 @@ public class UserStateController {
 
     @ApiOperation(value = "更新用户状态")
     @PostMapping
-    String  postUserStateInfo(@RequestBody UserStateInfo userStateInfo) {
+    String postUserStateInfo(@RequestBody UserStateInfo userStateInfo) {
         System.out.println(userStateInfo);
         userStateService.setUserState(userStateInfo);
         return "postUserStateInfo Success";

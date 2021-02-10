@@ -26,8 +26,20 @@ public class FriendRelationController {
 
     @ApiOperation(value = "获取用户的所有好友")
     @GetMapping
-    List<FriendRelation> getUser(User user) {
+    List<FriendRelation> getFriendRelation(User user) {
         return friendRelationService.getFriendRelation(user);
+    }
+
+    @ApiOperation(value = "获取用户的所有好友")
+    @GetMapping("/toUser")
+    List<User> getFriendRelationToUsers(User user) {
+        return friendRelationService.getFriendRelationToUsers(user);
+    }
+
+    @ApiOperation(value = "确认指定id之间的好友关系")
+    @GetMapping("/check")
+    Boolean checkFriendRelation(FriendRelation friendRelation) {
+        return friendRelationService.selectByUserid1AndUserid2(friendRelation) != null;
     }
 
     @ApiOperation(value = "增加指定好友")
@@ -45,15 +57,7 @@ public class FriendRelationController {
     @ApiOperation(value = "删除指定好友")
     @DeleteMapping
     Integer deleteFriendRelation(@RequestBody FriendRelation friendRelation) {
-        FriendRelation fr = friendRelationService.selectByUserid1AndUserid2(friendRelation);
-        if (fr != null) {
-            friendRelation.setFriendrelationcreatetime(Calendar.getInstance().getTime());
-            return friendRelationService.deleteByFriendRelationid(fr);
-        } else {
-            logger.debug("该好友关系不存在");
-            return -1;
-        }
-
+        return friendRelationService.deleteByFriendRelationid(friendRelation);
     }
 
 

@@ -42,7 +42,7 @@ public class MatchGroupController {
 
     @ApiOperation(value = "新建匹配群")
     @PostMapping
-    int createMatchGroup(@RequestBody MatchGroupInfo matchGroupInfo) {
+    MatchGroup createMatchGroup(@RequestBody MatchGroupInfo matchGroupInfo) {
         try {
             //1.申请新matchgroup获得新gid
             matchGroupInfo.matchGroup.setMatchgroupcreatetime(Calendar.getInstance().getTime());
@@ -56,15 +56,15 @@ public class MatchGroupController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return -1;
+            return null;
         }
-        return 0;
+        return matchGroupInfo.matchGroup;
     }
 
 
     @ApiOperation(value = "清除匹配群")
     @DeleteMapping
-    int deleteMatchGroup(MatchGroup matchGroup) {
+    int deleteMatchGroup(@RequestBody MatchGroup matchGroup) {
         try {
             matchGroupService.deleteByMatchGroup(matchGroup);
             matchGroupRelationService.deleteMatchGroupRelationByMatchGroupid(matchGroup.getMatchgroupid());

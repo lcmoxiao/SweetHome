@@ -40,21 +40,12 @@ public class MatchRelationController {
             logger.debug("该匹配已存在");
             return -1;
         }
-
     }
 
     @ApiOperation(value = "删除指定匹配")
     @DeleteMapping
     Integer deleteUser(@RequestBody MatchRelation matchRelation) {
-        MatchRelation fr = matchRelationService.selectByUserid1AndUserid2(matchRelation);
-        if (fr != null) {
-            matchRelation.setMatchrelationcreatetime(Calendar.getInstance().getTime());
-            return matchRelationService.deleteByFriendRelationid(fr);
-        } else {
-            logger.debug("该匹配不存在");
-            return -1;
-        }
-
+        return matchRelationService.deleteByMatchRelationid(matchRelation);
     }
 
 

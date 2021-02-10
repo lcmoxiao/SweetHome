@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@CacheConfig(cacheNames = "friendrelation")
+@CacheConfig(cacheNames = "matchrelationservice")
 @Service
 public class MatchRelationService {
 
@@ -30,7 +30,7 @@ public class MatchRelationService {
     }
 
     @Caching(evict = {@CacheEvict(key = "#matchRelation.userid1+'matchrelation'")})
-    public Integer deleteByFriendRelationid(MatchRelation matchRelation) {
+    public Integer deleteByMatchRelationid(MatchRelation matchRelation) {
         return matchRelationMapper.deleteByPrimaryKey(matchRelation.getMatchrelationid());
     }
 

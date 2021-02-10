@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jlp.mapper.FriendRelationMapper">
+
     <resultMap id="BaseResultMap" type="com.jlp.pojo.FriendRelation">
         <id column="friendrelationid" jdbcType="INTEGER" property="friendrelationid"/>
         <result column="userid1" jdbcType="INTEGER" property="userid1"/>
         <result column="userid2" jdbcType="INTEGER" property="userid2"/>
         <result column="friendrelationcreatetime" jdbcType="TIMESTAMP" property="friendrelationcreatetime"/>
     </resultMap>
+
+    <resultMap id="UserResultMap" type="com.jlp.pojo.User">
+        <id column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="userpassword" jdbcType="VARCHAR" property="userpassword"/>
+        <result column="usercreatetime" jdbcType="TIMESTAMP" property="usercreatetime"/>
+        <result column="userbirth" jdbcType="TIMESTAMP" property="userbirth"/>
+        <result column="usersex" jdbcType="TINYINT" property="usersex"/>
+        <result column="userphone" jdbcType="VARCHAR" property="userphone"/>
+        <result column="usermail" jdbcType="VARCHAR" property="usermail"/>
+        <result column="userfriendsize" jdbcType="INTEGER" property="userfriendsize"/>
+        <result column="userstate" jdbcType="INTEGER" property="userstate"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         friendrelationid, userid1, userid2, friendrelationcreatetime
+    </sql>
+    <sql id="User_Column_List">
+        userid, username, userpassword, usercreatetime, userbirth, usersex, userphone, usermail,
+    userfriendsize, userstate
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -17,11 +36,19 @@
         where friendrelationid = #{friendrelationid,jdbcType=INTEGER}
     </select>
 
-    <select id="selectByUserid1" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByUserid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from friendrelation
-        where userid1 = #{userid1}
+        where userid1 = #{userid1} OR userid2 = #{userid1}
+    </select>
+
+    <select id="selectByUseridToUsers" parameterType="java.lang.Integer" resultMap="UserResultMap">
+        select
+        <include refid="User_Column_List"/>
+        from friendrelation
+        inner join user on userid = userid2
+        where userid1 = #{userid1} OR userid2 = #{userid1}
     </select>
 
 
@@ -29,7 +56,7 @@
         select
         <include refid="Base_Column_List"/>
         from friendrelation
-        where userid1 = #{userid1} and userid2 = #{userid2}
+        where (userid1 = #{userid1} and userid2 = #{userid2}) OR (userid2 = #{userid1} and userid1 = #{userid2})
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

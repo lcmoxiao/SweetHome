@@ -9,9 +9,17 @@ public interface UserMapper {
 
     int insert(User record);
 
-    User selectByUsername(String username);
+    int insertSelective(User record);
+
+    User selectByPrimaryKey(Integer userid);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
+
+    User selectByUsername(String s);
+
+    User selectByUserMail(String s);
 
     List<User> selectAll();
-
-    Integer updateByPrimaryKeySelective(User user);
 }

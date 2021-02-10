@@ -8,26 +8,40 @@
         <result column="usercreatetime" jdbcType="TIMESTAMP" property="usercreatetime"/>
         <result column="userbirth" jdbcType="TIMESTAMP" property="userbirth"/>
         <result column="usersex" jdbcType="TINYINT" property="usersex"/>
+        <result column="userphone" jdbcType="VARCHAR" property="userphone"/>
+        <result column="usermail" jdbcType="VARCHAR" property="usermail"/>
+        <result column="userfriendsize" jdbcType="INTEGER" property="userfriendsize"/>
+        <result column="userstate" jdbcType="INTEGER" property="userstate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        userid, username, userpassword, usercreatetime, userbirth, usersex
+        userid, username, userpassword, usercreatetime, userbirth, usersex, userphone, usermail,
+    userfriendsize, userstate
     </sql>
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user
     </select>
+
+    <select id="selectByUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where username = #{username}
+    </select>
+
+    <select id="selectByUserMail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where usermail = #{usermail}
+    </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user
         where userid = #{userid,jdbcType=INTEGER}
-    </select>
-    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where username = #{username}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
@@ -36,9 +50,13 @@
     </delete>
     <insert id="insert" parameterType="com.jlp.pojo.User">
         insert into user (userid, username, userpassword,
-                          usercreatetime, userbirth, usersex)
+                          usercreatetime, userbirth, usersex,
+                          userphone, usermail, userfriendsize,
+                          userstate)
         values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR},
-                #{usercreatetime,jdbcType=TIMESTAMP}, #{userbirth,jdbcType=TIMESTAMP}, #{usersex,jdbcType=TINYINT})
+                #{usercreatetime,jdbcType=TIMESTAMP}, #{userbirth,jdbcType=TIMESTAMP}, #{usersex,jdbcType=TINYINT},
+                #{userphone,jdbcType=VARCHAR}, #{usermail,jdbcType=VARCHAR}, #{userfriendsize,jdbcType=INTEGER},
+                #{userstate,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jlp.pojo.User">
         insert into user
@@ -61,6 +79,18 @@
             <if test="usersex != null">
                 usersex,
             </if>
+            <if test="userphone != null">
+                userphone,
+            </if>
+            <if test="usermail != null">
+                usermail,
+            </if>
+            <if test="userfriendsize != null">
+                userfriendsize,
+            </if>
+            <if test="userstate != null">
+                userstate,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userid != null">
@@ -80,6 +110,18 @@
             </if>
             <if test="usersex != null">
                 #{usersex,jdbcType=TINYINT},
+            </if>
+            <if test="userphone != null">
+                #{userphone,jdbcType=VARCHAR},
+            </if>
+            <if test="usermail != null">
+                #{usermail,jdbcType=VARCHAR},
+            </if>
+            <if test="userfriendsize != null">
+                #{userfriendsize,jdbcType=INTEGER},
+            </if>
+            <if test="userstate != null">
+                #{userstate,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -101,6 +143,18 @@
             <if test="usersex != null">
                 usersex = #{usersex,jdbcType=TINYINT},
             </if>
+            <if test="userphone != null">
+                userphone = #{userphone,jdbcType=VARCHAR},
+            </if>
+            <if test="usermail != null">
+                usermail = #{usermail,jdbcType=VARCHAR},
+            </if>
+            <if test="userfriendsize != null">
+                userfriendsize = #{userfriendsize,jdbcType=INTEGER},
+            </if>
+            <if test="userstate != null">
+                userstate = #{userstate,jdbcType=INTEGER},
+            </if>
         </set>
         where userid = #{userid,jdbcType=INTEGER}
     </update>
@@ -110,7 +164,11 @@
             userpassword   = #{userpassword,jdbcType=VARCHAR},
             usercreatetime = #{usercreatetime,jdbcType=TIMESTAMP},
             userbirth      = #{userbirth,jdbcType=TIMESTAMP},
-            usersex        = #{usersex,jdbcType=TINYINT}
+            usersex        = #{usersex,jdbcType=TINYINT},
+            userphone      = #{userphone,jdbcType=VARCHAR},
+            usermail       = #{usermail,jdbcType=VARCHAR},
+            userfriendsize = #{userfriendsize,jdbcType=INTEGER},
+            userstate      = #{userstate,jdbcType=INTEGER}
         where userid = #{userid,jdbcType=INTEGER}
     </update>
 </mapper>
