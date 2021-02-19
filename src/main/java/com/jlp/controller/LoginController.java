@@ -27,16 +27,13 @@ public class LoginController {
     @ApiOperation(value = "输入用户名和密码 登录")
     @PostMapping
     User login(@RequestBody User user) {
-        String usermail = user.getUsermail();
         String userpassword = user.getUserpassword();
         User u2 = userService.selectByUserMail(user);
         String username = u2.getUsername();
-        if (u2 == null) {
-            logger.debug("空账户尝试登录,尝试的账户为：" + username);
-        } else if (!userpassword.equals(u2.getUserpassword())) {
-            logger.debug(username + "登录失败，密码错误");
+        if (!userpassword.equals(u2.getUserpassword())) {
+            logger.info(username + "登录失败，密码错误");
         } else {
-            logger.debug(username + "登陆成功");
+            logger.info(username + "登陆成功");
             return u2;
         }
         return null;

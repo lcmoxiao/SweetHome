@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <!-- <properties resource="db.properties" /> -->
     <classPathEntry
-            location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar"/>
+            location="C:\Users\LICHEN\.m2\repository\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar"/>
     <context id="mysql2Beans" targetRuntime="MyBatis3">
         <commentGenerator>
             <!-- 删除代码中带有 代码生成器的注释信息 -->
@@ -76,5 +76,16 @@
 <!--        </table>-->
 
 
+<!--                <table tableName="prison"-->
+<!--                       domainObjectName="Prison" enableCountByExample="false"-->
+<!--                       enableUpdateByExample="false" enableDeleteByExample="false"-->
+<!--                       enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--                </table>-->
+
+<!--                <table tableName="report"-->
+<!--                       domainObjectName="Report" enableCountByExample="false"-->
+<!--                       enableUpdateByExample="false" enableDeleteByExample="false"-->
+<!--                       enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--                </table>-->
     </context>
 </generatorConfiguration>

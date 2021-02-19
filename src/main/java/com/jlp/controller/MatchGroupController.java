@@ -34,6 +34,7 @@ public class MatchGroupController {
     }
 
 
+
     @ApiOperation(value = "获取指定用户id中的所有群id")
     @GetMapping("/allgroup")
     List<MatchGroupRelation> getGroupidByUserid(User user) {
@@ -54,6 +55,7 @@ public class MatchGroupController {
                 matchGroupRelation.setMatchgroupid(matchGroupInfo.matchGroup.getMatchgroupid());
                 matchGroupRelationService.insertMatchGroupRelation(matchGroupRelation);
             }
+            logger.info("建立了匹配群" + matchGroupInfo.matchGroup.getMatchgroupid());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -66,6 +68,7 @@ public class MatchGroupController {
     @DeleteMapping
     int deleteMatchGroup(@RequestBody MatchGroup matchGroup) {
         try {
+            logger.info("解散了匹配群" + matchGroup.getMatchgroupid());
             matchGroupService.deleteByMatchGroup(matchGroup);
             matchGroupRelationService.deleteMatchGroupRelationByMatchGroupid(matchGroup.getMatchgroupid());
         } catch (Exception e) {

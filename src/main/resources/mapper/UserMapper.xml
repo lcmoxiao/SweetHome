@@ -12,36 +12,34 @@
         <result column="usermail" jdbcType="VARCHAR" property="usermail"/>
         <result column="userfriendsize" jdbcType="INTEGER" property="userfriendsize"/>
         <result column="userstate" jdbcType="INTEGER" property="userstate"/>
+        <result column="headimg" jdbcType="VARCHAR" property="headimg"/>
     </resultMap>
     <sql id="Base_Column_List">
         userid, username, userpassword, usercreatetime, userbirth, usersex, userphone, usermail,
-    userfriendsize, userstate
+    userfriendsize, userstate, headimg
     </sql>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-    </select>
-
-    <select id="selectByUsername" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where username = #{username}
-    </select>
-
-    <select id="selectByUserMail" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where usermail = #{usermail}
-    </select>
-
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user
         where userid = #{userid,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+    <select id="selectByUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where username = #{username,jdbcType=INTEGER}
+    </select>
+    <select id="selectByUserMail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where usermail = #{usermail,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
@@ -52,11 +50,11 @@
         insert into user (userid, username, userpassword,
                           usercreatetime, userbirth, usersex,
                           userphone, usermail, userfriendsize,
-                          userstate)
+                          userstate, headimg)
         values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR},
                 #{usercreatetime,jdbcType=TIMESTAMP}, #{userbirth,jdbcType=TIMESTAMP}, #{usersex,jdbcType=TINYINT},
                 #{userphone,jdbcType=VARCHAR}, #{usermail,jdbcType=VARCHAR}, #{userfriendsize,jdbcType=INTEGER},
-                #{userstate,jdbcType=INTEGER})
+                #{userstate,jdbcType=INTEGER}, #{headimg,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jlp.pojo.User">
         insert into user
@@ -91,6 +89,9 @@
             <if test="userstate != null">
                 userstate,
             </if>
+            <if test="headimg != null">
+                headimg,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userid != null">
@@ -122,6 +123,9 @@
             </if>
             <if test="userstate != null">
                 #{userstate,jdbcType=INTEGER},
+            </if>
+            <if test="headimg != null">
+                #{headimg,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -155,6 +159,9 @@
             <if test="userstate != null">
                 userstate = #{userstate,jdbcType=INTEGER},
             </if>
+            <if test="headimg != null">
+                headimg = #{headimg,jdbcType=VARCHAR},
+            </if>
         </set>
         where userid = #{userid,jdbcType=INTEGER}
     </update>
@@ -168,7 +175,8 @@
             userphone      = #{userphone,jdbcType=VARCHAR},
             usermail       = #{usermail,jdbcType=VARCHAR},
             userfriendsize = #{userfriendsize,jdbcType=INTEGER},
-            userstate      = #{userstate,jdbcType=INTEGER}
+            userstate      = #{userstate,jdbcType=INTEGER},
+            headimg        = #{headimg,jdbcType=VARCHAR}
         where userid = #{userid,jdbcType=INTEGER}
     </update>
 </mapper>

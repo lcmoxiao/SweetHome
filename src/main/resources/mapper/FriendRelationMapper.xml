@@ -47,7 +47,7 @@
         select
         <include refid="User_Column_List"/>
         from friendrelation
-        inner join user on userid = userid2
+        inner join user on userid != #{userid1} and (userid = userid1 or userid = userid2)
         where userid1 = #{userid1} OR userid2 = #{userid1}
     </select>
 

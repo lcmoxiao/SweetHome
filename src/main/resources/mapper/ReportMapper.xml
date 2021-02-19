@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.jlp.pojo.Report">
+    <id column="reportid" jdbcType="INTEGER" property="reportid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="reportcreatetime" jdbcType="TIMESTAMP" property="reportcreatetime" />
+    <result column="result" jdbcType="INTEGER" property="result" />
+    <result column="resulttime" jdbcType="TIMESTAMP" property="resulttime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    reportid, userid, reason, reportcreatetime, result, resulttime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where reportid = #{reportid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from report
+    where reportid = #{reportid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlp.pojo.Report">
+    insert into report (reportid, userid, reason, 
+      reportcreatetime, result, resulttime
+      )
+    values (#{reportid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
+      #{reportcreatetime,jdbcType=TIMESTAMP}, #{result,jdbcType=INTEGER}, #{resulttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlp.pojo.Report">
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportid != null">
+        reportid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="reportcreatetime != null">
+        reportcreatetime,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="resulttime != null">
+        resulttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportid != null">
+        #{reportid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="reportcreatetime != null">
+        #{reportcreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="resulttime != null">
+        #{resulttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlp.pojo.Report">
+    update report
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="reportcreatetime != null">
+        reportcreatetime = #{reportcreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="resulttime != null">
+        resulttime = #{resulttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where reportid = #{reportid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlp.pojo.Report">
+    update report
+    set userid = #{userid,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      reportcreatetime = #{reportcreatetime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=INTEGER},
+      resulttime = #{resulttime,jdbcType=TIMESTAMP}
+    where reportid = #{reportid,jdbcType=INTEGER}
+  </update>
+</mapper>

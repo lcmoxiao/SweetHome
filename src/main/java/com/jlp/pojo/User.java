@@ -23,6 +23,8 @@ public class User {
 
     private Integer userstate;
 
+    private String headimg;
+
     public Integer getUserid() {
         return userid;
     }
@@ -101,5 +103,13 @@ public class User {
 
     public void setUserstate(Integer userstate) {
         this.userstate = userstate;
+    }
+
+    public String getHeadimg() {
+        return headimg;
+    }
+
+    public void setHeadimg(String headimg) {
+        this.headimg = headimg;
     }
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.PrisonMapper">
+  <resultMap id="BaseResultMap" type="com.jlp.pojo.Prison">
+    <id column="prisonid" jdbcType="INTEGER" property="prisonid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    prisonid, userid, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prison
+    where prisonid = #{prisonid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from prison
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prison
+    where prisonid = #{prisonid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlp.pojo.Prison">
+    insert into prison (prisonid, userid, createtime
+      )
+    values (#{prisonid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlp.pojo.Prison">
+    insert into prison
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prisonid != null">
+        prisonid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prisonid != null">
+        #{prisonid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlp.pojo.Prison">
+    update prison
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where prisonid = #{prisonid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlp.pojo.Prison">
+    update prison
+    set userid = #{userid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where prisonid = #{prisonid,jdbcType=INTEGER}
+  </update>
+</mapper>

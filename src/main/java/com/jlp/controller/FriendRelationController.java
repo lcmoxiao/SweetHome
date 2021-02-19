@@ -46,6 +46,7 @@ public class FriendRelationController {
     @PostMapping
     Integer postFriendRelation(@RequestBody FriendRelation friendRelation) {
         if (friendRelationService.selectByUserid1AndUserid2(friendRelation) == null) {
+            logger.info(friendRelation.getUserid1()+"和" +friendRelation.getUserid2()+"成了好友");
             friendRelation.setFriendrelationcreatetime(Calendar.getInstance().getTime());
             return friendRelationService.insert(friendRelation);
         } else {

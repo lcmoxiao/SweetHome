@@ -34,6 +34,7 @@ public class MatchRelationController {
     @PostMapping
     Integer postUser(@RequestBody MatchRelation matchRelation) {
         if (matchRelationService.selectByUserid1AndUserid2(matchRelation) == null) {
+            logger.info(matchRelation.getUserid1() + "和" + matchRelation.getUserid2() + "建立了匹配关系");
             matchRelation.setMatchrelationcreatetime(Calendar.getInstance().getTime());
             return matchRelationService.insert(matchRelation);
         } else {
